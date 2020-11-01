@@ -5,11 +5,12 @@ Task = mongoose.model('Tasks');
 
 
 exports.list_all_tasks = async function(req, res) {
-  tsk = await Task.find({}, function(err, task) {
+  const tsk = await Task.find({}, function(err, task) {
     if (err)
       res.send(err);
-    res.json({tsk});
+    
   });
+  res.json({results:tsk});
 };
 
 exports.create_a_task = function(req, res) {
