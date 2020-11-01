@@ -6,6 +6,7 @@ var express = require('express'),
   bodyParser = require('body-parser');
 const morgan = require('morgan');
 require('dotenv').config();
+const cors = require('cors');
 
 mongoose.Promise = global.Promise;
 
@@ -18,13 +19,8 @@ mongoose.connect(connection_url,{
 });
 
 app.use(morgan('dev'));
+app.use(cors());
 app.use(express.json())
-app.use((req,res,next)=>{
-    res.setHeader("Access-Control-Allow-Origin","*"),
-    res.setHeader("Access-Control-Allow-Headers","*"),
-    next();
-});
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
